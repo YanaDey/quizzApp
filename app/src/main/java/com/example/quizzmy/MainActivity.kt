@@ -1,42 +1,38 @@
 package com.example.quizzmy
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
 
-    var question0 = 0
-    var questionList = listOf("Здесь будет вопрос No1:\n\nA.Вариант 1 \n\nB. Вариант 2 \n\nC. Вариант 3" +
-        "Здесь будет вопрос No1:\n\nA.Вариант 1 \n\nB. Вариант 2 \n\nC. Вариант 3")
-    var rightAnswer = listOf(2,3)
+
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        supportActionBar?.hide()
 
-        val buttonA = findViewById<Button>(R.id.button2)
-        val buttonB = findViewById<Button>(R.id.button5)
-        val buttonC = findViewById<Button>(R.id.button6)
+        val button_Exit = findViewById<Button>(R.id.button_Exit)
+        val button_Start = findViewById<Button>(R.id.button)
 
-        buttonA.setOnClickListener{
-            showToast(1,"")
-        }
-        buttonB.setOnClickListener{
-            showToast(2,"")
-        }
-        buttonC.setOnClickListener{
-            showToast(3,"")
-        }
+        button_Exit.setOnClickListener(this::exitApp)
+        button_Start.setOnClickListener(this::startNew)
     }
 
-    fun showToast(answer: Int, text: String) {
-        if (answer == 1) {
-            Toast.makeText(applicationContext, "Правильно", Toast.LENGTH_SHORT).show()
-        }else {
-            Toast.makeText(applicationContext, "Ответ неверный", Toast.LENGTH_SHORT).show()
-        }
+    fun startNew(View: View) {
+        val intent = Intent(this, SecondActivity:: class.java)
+        startActivity(intent)
+    }
+
+
+    fun exitApp(View: View) {
+        finish()
     }
 }
